@@ -11,8 +11,16 @@ const AppRouter = () => (
   <Router history={history}>
     <Header />
     <Switch>
-      <Route path="/" exact={true} component={IndexPage} />
-      <Route path="/add" exact={true} component={AddStockPage} />
+      <Route
+        path={process.env.PUBLIC_URL + "/"}
+        exact={true}
+        component={IndexPage}
+      />
+      <Route
+        path={process.env.PUBLIC_URL + "/add"}
+        exact={true}
+        component={AddStockPage}
+      />
     </Switch>
   </Router>
 );

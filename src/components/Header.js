@@ -10,7 +10,10 @@ function Header() {
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6">
-          <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+          <Link
+            to={process.env.PUBLIC_URL + "/"}
+            style={{ textDecoration: "none", color: "white" }}
+          >
             PortFOLIO-XR
           </Link>
         </Typography>

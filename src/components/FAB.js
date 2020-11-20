@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 function FAB() {
   const classes = useStyles();
   return (
-    <Link to="/add">
+    <Link to={process.env.PUBLIC_URL + "/add"}>
       <Fab color="primary" aria-label="add" className={classes.fab}>
         <AddIcon />
       </Fab>
