@@ -4,7 +4,7 @@ export const startGetStocks = () => {
   return async (dispatch) => {
     try {
       const stocks = await axios.get(
-        "http://us-central1-stock-fantasy-fd46e.cloudfunctions.net/helloWorld"
+        "https://us-central1-stock-fantasy-fd46e.cloudfunctions.net/helloWorld"
       );
 
       // console.log(stocks.data);
