@@ -1,17 +1,46 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import configStore from "./redux/store";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+import AppRouter from "./Routers/AppRouters";
+import reportWebVitals from "./reportWebVitals";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+import { startGetStocks } from "./redux/stockAction";
+
+const store = configStore();
+
+ReactDOM.render(<p>Loading</p>, document.getElementById("root"));
+let hasRendered = false;
+
+const renderApp = () => {
+  if (!hasRendered) {
+    ReactDOM.render(
+      <React.StrictMode>
+        <CssBaseline />
+        <Provider store={store}>
+          <AppRouter />
+        </Provider>
+        ,
+      </React.StrictMode>,
+      document.getElementById("root")
+    );
+    hasRendered = true;
+  }
+};
+
+store.subscribe(() => {
+  localStorage.setItem("reduxState", JSON.stringify(store.getState()));
+  // console.log(store.getState().stocks, store.getState().stocks.userstocks);
+});
+
+store.dispatch(startGetStocks()).then(() => {
+  renderApp();
+});
+
+setInterval(() => {
+  store.dispatch(startGetStocks());
+}, 2000);
+
 reportWebVitals();
